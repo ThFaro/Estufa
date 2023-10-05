@@ -63,6 +63,7 @@ class Higrometro {
             this.umidadeAr = umidadeAr;
             this.umidadeSolo = umidadeSolo;
             JOptionPane.showMessageDialog(null, "Cadastro de Higrômetro realizado com sucesso!");
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos com valores válidos.", "Erro de Cadastro",
                     JOptionPane.ERROR_MESSAGE);

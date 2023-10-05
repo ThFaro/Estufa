@@ -103,15 +103,15 @@ class Cliente {
         String celular = JOptionPane.showInputDialog("Digite seu celular");
         String tipoPlanta = JOptionPane.showInputDialog("Qual o seu cultivo?");
 
-        if (nome != null && cpf != null && tipoPlanta != null && email != null && celular != null) {
+        try{
             this.nome = nome;
             this.cpf = cpf;
             this.email = email;
             this.celular = celular;
-            this.tipoPlanta = tipoPlanta; // try
-
+            this.tipoPlanta = tipoPlanta;
             JOptionPane.showMessageDialog(null, "Cadastro de Cliente realizado com sucesso!");
-        } else {
+            
+        } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios.", "Erro de Cadastro",
                     JOptionPane.ERROR_MESSAGE);
         }
