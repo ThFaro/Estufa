@@ -16,6 +16,7 @@ class Higrometro {
         this.temperaturaExterna = temperaturaExterna;
         this.umidadeAr = umidadeAr;
         this.umidadeSolo = umidadeSolo;
+
     }
 
     public double getTemperaturaInterna() {
@@ -56,20 +57,25 @@ class Higrometro {
         double umidadeAr = Double.parseDouble(JOptionPane.showInputDialog("Digite a umidade do ar:"));
         double umidadeSolo = Double.parseDouble(JOptionPane.showInputDialog("Digite a umidade do solo:"));
 
-        if (temperaturaInterna >= 0 && temperaturaExterna >= 0 && umidadeAr >= 0 && umidadeSolo >= 0) {
+        try {
             this.temperaturaInterna = temperaturaInterna;
             this.temperaturaExterna = temperaturaExterna;
             this.umidadeAr = umidadeAr;
             this.umidadeSolo = umidadeSolo;
             JOptionPane.showMessageDialog(null, "Cadastro de Higrômetro realizado com sucesso!");
-        } else {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos com valores válidos.", "Erro de Cadastro",
                     JOptionPane.ERROR_MESSAGE);
         }
 
     }
 
-    public String imprimir() {
+    public void imprimir() {
+
+        System.out.println(temperaturaExterna);
+        System.out.println(temperaturaInterna);
+        System.out.println(umidadeAr);
+        System.out.println(umidadeSolo);
 
         if (temperaturaInterna >= 26) {
             JOptionPane.showMessageDialog(null, "Temperatura interna muito alta!");
@@ -103,6 +109,5 @@ class Higrometro {
             JOptionPane.showMessageDialog(null, "Umidade do solo ideal!");
         }
 
-        return imprimir();
     }
 }

@@ -1,6 +1,8 @@
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
-class Cliente extends Higrometro{
+class Cliente {
 
     private String nome;
     private String cpf;
@@ -9,8 +11,10 @@ class Cliente extends Higrometro{
     private String celular;
     private String dataNasc;
     private String informacoesCultivo;
+    private ArrayList<Higrometro> higrometroList;
 
     public Cliente() {
+        higrometroList = new ArrayList<>();
 
     }
 
@@ -20,6 +24,7 @@ class Cliente extends Higrometro{
         this.tipoPlanta = tipoPlanta;
         this.email = email;
         this.celular = celular;
+        higrometroList = new ArrayList<>();
     }
 
     public String getNome() {
@@ -78,6 +83,19 @@ class Cliente extends Higrometro{
         this.informacoesCultivo = informacoesCultivo;
     }
 
+    public ArrayList<Higrometro> gethigrometroList() {
+        return this.higrometroList;
+    }
+
+    public Higrometro getHigrometro(int index) {
+        return this.higrometroList.get(index);
+    }
+
+    public void setHigrometro(Higrometro h) {
+        this.higrometroList.add(h);
+
+    }
+
     public void cadastrarCliente() {
         String nome = JOptionPane.showInputDialog("Digite seu nome");
         String cpf = JOptionPane.showInputDialog("Digite seu CPF");
@@ -90,7 +108,7 @@ class Cliente extends Higrometro{
             this.cpf = cpf;
             this.email = email;
             this.celular = celular;
-            this.tipoPlanta = tipoPlanta;
+            this.tipoPlanta = tipoPlanta; // try
 
             JOptionPane.showMessageDialog(null, "Cadastro de Cliente realizado com sucesso!");
         } else {
