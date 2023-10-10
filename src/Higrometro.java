@@ -6,6 +6,7 @@ class Higrometro {
     private double temperaturaExterna;
     private double umidadeAr;
     private double umidadeSolo;
+   // private  String dataLeitura;
 
     public Higrometro() {
 
