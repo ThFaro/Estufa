@@ -1,23 +1,18 @@
 import javax.swing.JOptionPane;
 
-class Higrometro {
-
+public class Higrometro {
+    private String nomeCultivo;
     private double temperaturaInterna;
     private double temperaturaExterna;
     private double umidadeAr;
     private double umidadeSolo;
-   // private  String dataLeitura;
 
-    public Higrometro() {
-
+    public Higrometro(String nomeCultivo) {
+        this.nomeCultivo = nomeCultivo;
     }
 
-    public Higrometro(double temperaturaInterna, double temperaturaExterna, double umidadeAr, double umidadeSolo) {
-        this.temperaturaInterna = temperaturaInterna;
-        this.temperaturaExterna = temperaturaExterna;
-        this.umidadeAr = umidadeAr;
-        this.umidadeSolo = umidadeSolo;
-
+    public String getNomeCultivo() {
+        return this.nomeCultivo;
     }
 
     public double getTemperaturaInterna() {
@@ -53,63 +48,53 @@ class Higrometro {
     }
 
     public void cadastrarHigrometro() {
-        double temperaturaInterna = Double.parseDouble(JOptionPane.showInputDialog("Digite a temperatura interna:"));
-        double temperaturaExterna = Double.parseDouble(JOptionPane.showInputDialog("Digite a temperatura externa:"));
-        double umidadeAr = Double.parseDouble(JOptionPane.showInputDialog("Digite a umidade do ar:"));
-        double umidadeSolo = Double.parseDouble(JOptionPane.showInputDialog("Digite a umidade do solo:"));
+        temperaturaInterna = Double.parseDouble(JOptionPane.showInputDialog("Digite a temperatura interna:"));
+        temperaturaExterna = Double.parseDouble(JOptionPane.showInputDialog("Digite a temperatura externa:"));
+        umidadeAr = Double.parseDouble(JOptionPane.showInputDialog("Digite a umidade do ar:"));
+        umidadeSolo = Double.parseDouble(JOptionPane.showInputDialog("Digite a umidade do solo:"));
 
-        try {
-            this.temperaturaInterna = temperaturaInterna;
-            this.temperaturaExterna = temperaturaExterna;
-            this.umidadeAr = umidadeAr;
-            this.umidadeSolo = umidadeSolo;
-            JOptionPane.showMessageDialog(null, "Cadastro de Higrômetro realizado com sucesso!");
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos com valores válidos.", "Erro de Cadastro",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-
+        JOptionPane.showMessageDialog(null, "Cadastro de Higrômetro realizado com sucesso!");
     }
 
     public void imprimir() {
-
-        System.out.println(temperaturaExterna);
-        System.out.println(temperaturaInterna);
-        System.out.println(umidadeAr);
-        System.out.println(umidadeSolo);
+        String mensagem = "Dados do Higrômetro para o cultivo " + nomeCultivo + ":\n";
+        mensagem += "Temperatura Interna: " + temperaturaInterna + " °C\n";
+        mensagem += "Temperatura Externa: " + temperaturaExterna + " °C\n";
+        mensagem += "Umidade do Ar: " + umidadeAr + " %\n";
+        mensagem += "Umidade do Solo: " + umidadeSolo + " %\n";
 
         if (temperaturaInterna >= 26) {
-            JOptionPane.showMessageDialog(null, "Temperatura interna muito alta!");
+            mensagem += "Temperatura interna muito alta!\n";
         } else if (temperaturaInterna <= 19) {
-            JOptionPane.showMessageDialog(null, "Temperatura interna muito baixa!");
+            mensagem += "Temperatura interna muito baixa!\n";
         } else {
-            JOptionPane.showMessageDialog(null, "Temperatura interna ideal!");
+            mensagem += "Temperatura interna ideal!\n";
         }
 
         if (temperaturaExterna >= 28) {
-            JOptionPane.showMessageDialog(null, "Temperatura Externa muito alta!");
+            mensagem += "Temperatura Externa muito alta!\n";
         } else if (temperaturaExterna <= 18) {
-            JOptionPane.showMessageDialog(null, "Temperatura Externa  muito baixa!");
+            mensagem += "Temperatura Externa muito baixa!\n";
         } else {
-            JOptionPane.showMessageDialog(null, "Temperatura Externa  ideal!");
+            mensagem += "Temperatura Externa ideal!\n";
         }
 
         if (umidadeAr >= 81) {
-            JOptionPane.showMessageDialog(null, "Umidade do ar muito  alta!");
+            mensagem += "Umidade do ar muito alta!\n";
         } else if (umidadeAr <= 59) {
-            JOptionPane.showMessageDialog(null, "Umidade do ar muito baixa!");
+            mensagem += "Umidade do ar muito baixa!\n";
         } else {
-            JOptionPane.showMessageDialog(null, "Umidade do ar ideal!");
+            mensagem += "Umidade do ar ideal!\n";
         }
 
         if (umidadeSolo >= 81) {
-            JOptionPane.showMessageDialog(null, "Umidade do solo muito  alta!");
+            mensagem += "Umidade do solo muito alta!\n";
         } else if (umidadeSolo <= 59) {
-            JOptionPane.showMessageDialog(null, "Umidade do solo muito baixa!");
+            mensagem += "Umidade do solo muito baixa! INICIANDO A REGA!\n";
         } else {
-            JOptionPane.showMessageDialog(null, "Umidade do solo ideal!");
+            mensagem += "Umidade do solo ideal!\n";
         }
 
+        JOptionPane.showMessageDialog(null, mensagem);
     }
 }

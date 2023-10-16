@@ -1,29 +1,21 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Date;
 import javax.swing.JOptionPane;
 
-class Cliente {
-
+public class Cliente {
     private String nome;
     private String cpf;
-    private String tipoPlanta;
     private String email;
     private String celular;
-    private String dataNasc;
-    private String informacoesCultivo;
+    private String senha;
+    private Date dataNascimento;
+    private ArrayList<String> tiposPlantio;
     private ArrayList<Higrometro> higrometroList;
 
     public Cliente() {
-        higrometroList = new ArrayList<>();
-
-    }
-
-    public Cliente(String nome, String cpf, String tipoPlanta, String email, String celular) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.tipoPlanta = tipoPlanta;
-        this.email = email;
-        this.celular = celular;
+        tiposPlantio = new ArrayList<>();
         higrometroList = new ArrayList<>();
     }
 
@@ -43,14 +35,6 @@ class Cliente {
         this.cpf = cpf;
     }
 
-    public String getTipoPlanta() {
-        return this.tipoPlanta;
-    }
-
-    public void setTipoPlanta(String tipoPlanta) {
-        this.tipoPlanta = tipoPlanta;
-    }
-
     public String getEmail() {
         return this.email;
     }
@@ -67,61 +51,115 @@ class Cliente {
         this.celular = celular;
     }
 
-    public String getDataNasc() {
-        return dataNasc;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setDataNasc(String dataNasc) {
-        this.dataNasc = dataNasc;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
-    public String getInformacoesCultivo() {
-        return this.informacoesCultivo;
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setInformacoesCultivo(String informacoesCultivo) {
-        this.informacoesCultivo = informacoesCultivo;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
-    public ArrayList<Higrometro> gethigrometroList() {
+    public ArrayList<String> getTiposPlantio() {
+        return this.tiposPlantio;
+    }
+
+    public ArrayList<Higrometro> getHigrometroList() {
         return this.higrometroList;
     }
 
-    public Higrometro getHigrometro(int index) {
-        return this.higrometroList.get(index);
+    public void adicionarTipoPlanta(String tipoPlanta) {
+        tiposPlantio.add(tipoPlanta);
     }
 
-    public void setHigrometro(Higrometro h) {
-        this.higrometroList.add(h);
+    public boolean removerTipoPlanta(String tipoPlanta) {
+        return tiposPlantio.remove(tipoPlanta);
+    }
 
+    public Higrometro getHigrometro(String nomeCultivo) {
+        for (Higrometro higrometro : higrometroList) {
+            if (higrometro.getNomeCultivo().equals(nomeCultivo)) {
+                return higrometro;
+            }
+        }
+        return null;
+    }
+
+    public void adicionarHigrometro(Higrometro higrometro) {
+        higrometroList.add(higrometro);
     }
 
     public void cadastrarCliente() {
-        String nome = JOptionPane.showInputDialog("Digite seu nome");
-        String cpf = JOptionPane.showInputDialog("Digite seu CPF");
-        String email = JOptionPane.showInputDialog("Digite seu email");
-        String celular = JOptionPane.showInputDialog("Digite seu celular");
-        String tipoPlanta = JOptionPane.showInputDialog("Qual o seu cultivo?");
+        nome = JOptionPane.showInputDialog("Digite seu nome");
+        cpf = JOptionPane.showInputDialog("Digite seu CPF");
+        email = JOptionPane.showInputDialog("Digite seu email");
+        celular = JOptionPane.showInputDialog("Digite seu celular");
+    }
 
-        try{
-            this.nome = nome;
-            this.cpf = cpf;
-            this.email = email;
-            this.celular = celular;
-            this.tipoPlanta = tipoPlanta;
-            JOptionPane.showMessageDialog(null, "Cadastro de Cliente realizado com sucesso!");
-            
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios.", "Erro de Cadastro",
-                    JOptionPane.ERROR_MESSAGE);
+    public void cadastrarSenha() {
+        senha = new String(JOptionPane.showInputDialog("Digite a senha:"));
+    }
+
+    public void cadastrarDataNascimento() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            dataNascimento = sdf.parse(JOptionPane.showInputDialog("Digite sua data de nascimento (dd/MM/yyyy):"));
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Data de nascimento inválida.");
         }
     }
 
-    public void mostrarInformacoesCultivo() {
-        String mensagem = "Informações de cultivo do cliente:\n";
-        mensagem += "Nome: " + nome + "\n";
-        mensagem += "Cultivo: " + tipoPlanta + "\n";
+    public void cadastrarEmail() {
+        String emailInput;
+        do {
+            emailInput = JOptionPane.showInputDialog("Digite seu email:");
+        } while (!isEmailValid(emailInput));
+        email = emailInput;
+    }
 
+    public void cadastrarCelular() {
+        String celularInput;
+        do {
+            celularInput = JOptionPane.showInputDialog("Digite seu celular:");
+        } while (!isCelularValid(celularInput));
+        celular = celularInput;
+    }
+
+    private boolean isEmailValid(String email) {
+        return email.matches(".+@.+\\..+");
+    }
+
+    private boolean isCelularValid(String celular) {
+        return celular.matches("\\d+");
+    }
+
+    public boolean validarCadastro() {
+        return isEmailValid(email) && isCelularValid(celular) && !cpf.isEmpty() && !senha.isEmpty();
+    }
+
+    public void mostrarInformacoesCultivo() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String mensagem = "Informações do cliente:\n";
+        mensagem += "Nome: " + nome + "\n";
+        mensagem += "CPF: " + cpf + "\n";
+        mensagem += "Email: " + email + "\n";
+        mensagem += "Celular: " + celular + "\n";
+        mensagem += "Data de Nascimento: " + (dataNascimento != null ? sdf.format(dataNascimento) : "Não informada") + "\n";
+        mensagem += "Cultivos:\n";
+        for (String tipoPlanta : tiposPlantio) {
+            mensagem += "- " + tipoPlanta + "\n";
+        }
         JOptionPane.showMessageDialog(null, mensagem);
+    }
+
+    public boolean verificarSenha(String senha) {
+        return this.senha.equals(senha);
     }
 }
