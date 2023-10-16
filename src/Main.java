@@ -29,7 +29,7 @@ public class Main {
 
             String escolha = (String) JOptionPane.showInputDialog(
                     null,
-                    "Selecione uma opção:",
+                    "BEM VINDO AO HIGRONO ECONOMY!",
                     "Menu",
                     JOptionPane.QUESTION_MESSAGE,
                     null,
@@ -163,7 +163,7 @@ public class Main {
     }
 
     public static void adicionarOuAlterarDadosPlantio(Cliente clienteLogado) {
-        String tipoPlanta = JOptionPane.showInputDialog("Digite o tipo de plantio para adicionar/alterar dados:");
+        String tipoPlanta = JOptionPane.showInputDialog("Qual o cultivo você deseja adicionar/alterar os dados:");
         Higrometro higrometro = clienteLogado.getHigrometro(tipoPlanta);
 
         if (higrometro == null) {
@@ -173,6 +173,7 @@ public class Main {
 
         higrometro.cadastrarHigrometro();
     }
+
 
     public static Cliente procurarClienteByCPF(ArrayList<Cliente> clienteList, String cpf) {
         for (Cliente cliente : clienteList) {

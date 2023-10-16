@@ -48,12 +48,12 @@ public class Higrometro {
     }
 
     public void cadastrarHigrometro() {
-        temperaturaInterna = Double.parseDouble(JOptionPane.showInputDialog("Digite a temperatura interna:"));
-        temperaturaExterna = Double.parseDouble(JOptionPane.showInputDialog("Digite a temperatura externa:"));
-        umidadeAr = Double.parseDouble(JOptionPane.showInputDialog("Digite a umidade do ar:"));
-        umidadeSolo = Double.parseDouble(JOptionPane.showInputDialog("Digite a umidade do solo:"));
+        temperaturaInterna = Double.parseDouble(JOptionPane.showInputDialog("Temperatura interna:"));
+        temperaturaExterna = Double.parseDouble(JOptionPane.showInputDialog("Temperatura externa:"));
+        umidadeAr = Double.parseDouble(JOptionPane.showInputDialog("Umidade do ar:"));
+        umidadeSolo = Double.parseDouble(JOptionPane.showInputDialog("Umidade do solo:"));
 
-        JOptionPane.showMessageDialog(null, "Cadastro de Higrômetro realizado com sucesso!");
+        JOptionPane.showMessageDialog(null, "Registro do plantio realizado com sucesso!");
     }
 
     public void imprimir() {
@@ -90,7 +90,7 @@ public class Higrometro {
         if (umidadeSolo >= 81) {
             mensagem += "Umidade do solo muito alta!\n";
         } else if (umidadeSolo <= 59) {
-            mensagem += "Umidade do solo muito baixa! INICIANDO A REGA!\n";
+            mensagem += "Umidade do solo muito baixa! INICIANDO IRRIGAÇÃO\n";
         } else {
             mensagem += "Umidade do solo ideal!\n";
         }

@@ -98,9 +98,9 @@ public class Cliente {
 
     public void cadastrarCliente() {
         nome = JOptionPane.showInputDialog("Digite seu nome");
-        cpf = JOptionPane.showInputDialog("Digite seu CPF");
+        cpf = JOptionPane.showInputDialog("Digite seu CPF (Digitar apenas números)");
         email = JOptionPane.showInputDialog("Digite seu email");
-        celular = JOptionPane.showInputDialog("Digite seu celular");
+        celular = JOptionPane.showInputDialog("Digite seu celular (Digitar apenas números)");
     }
 
     public void cadastrarSenha() {
@@ -110,7 +110,7 @@ public class Cliente {
     public void cadastrarDataNascimento() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            dataNascimento = sdf.parse(JOptionPane.showInputDialog("Digite sua data de nascimento (dd/MM/yyyy):"));
+            dataNascimento = sdf.parse(JOptionPane.showInputDialog("Digite sua data de nascimento (DIA/MÊS/ANO):"));
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(null, "Data de nascimento inválida.");
         }
@@ -145,7 +145,7 @@ public class Cliente {
     }
 
     public void mostrarInformacoesCultivo() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYY");
         String mensagem = "Informações do cliente:\n";
         mensagem += "Nome: " + nome + "\n";
         mensagem += "CPF: " + cpf + "\n";
